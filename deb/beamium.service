@@ -1,0 +1,19 @@
+[Unit]
+Description=Daemon for beamium
+After=
+Wants=
+Requires=
+
+[Service]
+Type=simple
+Restart=on-failure
+StartLimitInterval=20
+StartLimitBurst=5
+TimeoutStartSec=0
+Environment="HOME=/root"
+SyslogIdentifier=beamium
+ExecStart=/usr/bin/beamium --config /etc/beamium/config.yaml
+WorkingDirectory=/opt/beamium
+
+[Install]
+WantedBy=multi-user.target

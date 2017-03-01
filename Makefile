@@ -12,18 +12,19 @@ build: clean
 deb:
 		rm -f beamium*.deb
 		fpm -m "<kevin@d33d33.fr>" \
-		  --description "Prometheus to Warp10 metrics forwarder" \
-			--url "https://github.com/runabove/beamium" \
-			--license "BSD-3-Clause" \
-			--version $(shell echo $$(./build/beamium --version | awk '{print $$2}')) \
-			-n beamium \
+		    -n beamium \
 			-d logrotate \
 			-s dir -t deb \
 			-a all \
+			--description "Prometheus to Warp10 metrics forwarder" \
+			--url "https://github.com/runabove/beamium" \
+			--license "BSD-3-Clause" \
+			--version $(shell echo $$(./build/beamium --version | awk '{print $$2}')) \
 			--deb-user beamium \
 			--deb-group beamium \
 			--deb-no-default-config-files \
 			--config-files /etc/beamium/config.yaml \
+			--deb-systemd deb/beamium.service \
 			--deb-init deb/beamium.init \
 			--directories /opt/beamium \
 			--directories /var/log/beamium \
