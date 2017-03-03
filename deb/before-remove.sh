@@ -1,10 +1,7 @@
 #!/bin/bash
 INSTALLED=$([[ `systemctl` =~ -\.mount ]] && echo yes || echo no)
-if [ "$INSTALLED" == "yes" ]
+if [ "$INSTALLED" == "no" ]
 then
-    systemctl stop beamium
-    systemctl daemon-reload
-else
     /etc/init.d/beamium stop
     update-rc.d -f beamium remove
 fi
