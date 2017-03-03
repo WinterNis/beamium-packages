@@ -1,6 +1,5 @@
 #!/bin/bash
-INSTALLED=$([[ `systemctl` =~ -\.mount ]] && echo yes || echo no)
-if [ "$INSTALLED" == "no" ]
+if ! systemctl | grep "\-.mount" 
 then
     update-rc.d beamium defaults
     /etc/init.d/beamium start
