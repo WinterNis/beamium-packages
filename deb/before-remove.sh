@@ -1,6 +1,6 @@
 #!/bin/bash
-INSTALLED=$(pidof systemd && echo "systemd" || echo "other")
-if [ "$INSTALLED" != "other" ]
+INSTALLED=$([[ `systemctl` =~ -\.mount ]] && echo yes || echo no)
+if [ "$INSTALLED" == "yes" ]
 then
     systemctl stop beamium
     systemctl daemon-reload
